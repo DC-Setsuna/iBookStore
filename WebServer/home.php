@@ -2,6 +2,7 @@
 //dev env
 header('Access-Control-Allow-Origin: *');
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
 include('Db.php');
 include('Response.php');
 
@@ -29,7 +30,7 @@ EOF;
 	$query = <<<EOF
 	SELECT `id`,`book_title`,`book_price`,`book_rate`,`img_url`
 	FROM `book` 
-	WHERE `book_class` IS '{$request}' 
+	WHERE `book_class` = '{$request}' 
 	ORDER BY `book_rate` DESC
 	LIMIT 12;
 EOF;

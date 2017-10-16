@@ -50,7 +50,7 @@ class Response {
 		if(!is_numeric($code)) {
 			return '';
 		}
-
+		
 		$result = array(
 			'code' => $code,
 			'message' => $message,

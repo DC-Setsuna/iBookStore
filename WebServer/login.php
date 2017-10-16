@@ -1,16 +1,16 @@
 <?php
-
 //dev env
 header('Access-Control-Allow-Origin: *');
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 include('Db.php');
 include('Response.php');
 
-const USERNAME = $_POST['username'];
-const PASSWORD = $_POST['password'];
-$remember = $_POST['remember'];  # remember code
+$USERNAME = $_GET['username'];
+$PASSWORD = $_GET['password'];
+$remember = $_GET['remember'];  # remember code
 
-if (!(USERNAME && PASSWORD)) {
+if (!($USERNAME && $PASSWORD)) {
 	exit('empty data');
 	# JS Lint
 }
@@ -21,7 +21,7 @@ $dbc = $db->connect();
 $query = <<<EOF
 	SELECT `username`,`password`
 	FROM `user`
-	WHERE `username` IS '{USERNAME}';
+	WHERE `username` = '{$USERNAME}';
 EOF;
 
 $stme = $dbc->query($query);
@@ -30,12 +30,14 @@ $stme = $dbc->query($query);
 if ($stme) {
 	$result = $stme->fetch();
 	$psd = $result['password'];
-	if ($psd == PASSWORD) {
+	if ($psd == $PASSWORD) {
 		# success...
-		setcookie('username', USERNAME, time()+(60*60*24));
-		setcookie('password', PASSWORD, time()+600);
-		setcookie('islogin', 'true', time()+(60*60*24));
-
+		if ($remember == 'true') {
+			setcookie('username', $USERNAME, time()+(60*60*24));
+			setcookie('password', $PASSWORD, time()+600);
+			setcookie('islogin', 'true', time()+(60*60*24));
+		}
+		Response::show(200, 'success');
 	} else {
 		# wrong...
 		Response::show(202, 'Password is wrong');

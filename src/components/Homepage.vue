@@ -3,7 +3,7 @@
 		<div class="search-bar">
 			<el-input placeholder="输入关键字查询" v-model="keyword">
 			    <el-select v-model="select" slot="prepend" placeholder="所有类别">
-			      <el-option v-for="class_ in class_list" :label="class_" :value="class_"></el-option>
+			      <el-option v-for="(value, key) in class_list" :label="key" :value="key"></el-option>
 			    </el-select>
 			    <el-button slot="append" icon="search"></el-button>
 			  </el-input>
@@ -19,7 +19,7 @@
 		
 		<div class="homepage-con">
 			<div class="menu-left">
-				<el-menu default-active="2" class="el-menu-vertical-demo">
+				<el-menu default-active="1" >
 	      			<el-submenu index="1">
 	        			<template slot="title">编辑推荐</template>
 			        <el-menu-item-group title="分组一">
@@ -34,11 +34,13 @@
 			          <el-menu-item index="1-4-1">选项1</el-menu-item>
 			        </el-submenu>
 			      </el-submenu>
-			      <el-menu-item index="class_" v-for="class_ in class_list">{{ class_ }}</el-menu-item>
+			      <el-menu-item :index="value" v-for="(value, key) in class_list" @click="getItem(key)">
+			        {{ key }}
+			  	  </el-menu-item>
 			   
 	    		</el-menu>
 			</div>
-
+			
 			<div class="con-right">
 				<Itembar :datas="item" v-for="item in view_data" />
 			</div>
@@ -61,7 +63,15 @@ export default {
 		return {
 			keyword: '',
 			select: '',
-			class_list: ['所有类别','小说','人文社科','教育','科技','生活','文艺'],
+			class_list: {
+				'所有类别': 'all',
+				'小说': 'fiction',
+				'人文社科': 'humanities',
+				'教育': 'education',
+				'科技': 'science',
+				'生活': 'life',
+				'艺术': 'arts' 
+			},
 			showbar_list: [
 				"/static/showbar1.jpg",
 				'/static/showbar2.jpg',
@@ -74,20 +84,26 @@ export default {
 	},
 	components: {Itembar},
 	methods: {
-
+		getItem: function(key) {
+			var _key = key
+			if (_key === '所有类别') {
+				_key = 'all'
+			}
+			this.axios.get('http://localhost/home.php',{
+				params: {
+					cls: _key
+				}
+			}).then((response) => {
+				console.log(response.data['data'])
+				if(response.data['code'] == 200){
+					this.view_data = response.data['data']
+				}
+				
+			})
+		}
 	},
-	beforeCreate: function() {
-		this.axios.get('http://localhost/home.php',{
-			params: {
-				cls: 'all'
-			}
-		}).then((response) => {
-			console.log(response.data['data'])
-			if(response.data['code'] == 200){
-				this.view_data = response.data['data']
-			}
-			
-		})
+	created: function() {
+		this.getItem('all')
 	}
 }
 </script>
@@ -128,8 +144,8 @@ export default {
 .con-right {
 	margin-left: 200px;
 	padding-top: 40px;
+	padding-bottom: 40px;
 	width: 937px;
-	height: 1130px;
 	background-color: #fff
 }
 </style>
