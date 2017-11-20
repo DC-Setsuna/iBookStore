@@ -1,9 +1,9 @@
 <template>
 	<div class="item">
 		<div class="item-img">
-			<a href="">
+			<router-link :to="'/bookdetail/' + datas.id">
 				<img class="image" :src="datas.img_url">
-			</a>
+			</router-link>
 		</div>
 		<div class="item-title"><nobr>{{ datas.book_title }}</nobr></div>
 		<div class="item-price">¥  {{ datas.book_price }}</div>

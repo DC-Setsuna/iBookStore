@@ -5,11 +5,12 @@
       <div class="header_nav">
         <el-menu theme="dark" :router="true" class="el-menu-demo" mode="horizontal" @select="handleSelect">
           <el-menu-item index="/"><i class="el-icon-menu"></i>首页</el-menu-item>
-          <el-menu-item index="/"><i class="el-icon-search"></i>高级搜索</el-menu-item>
-          <el-menu-item index="/">销售排行榜</el-menu-item>
-          <el-menu-item index="/">购物车<el-badge :value="car_count" /></el-menu-item>
+          <el-menu-item index="/highsearch"><i class="el-icon-search"></i>高级搜索</el-menu-item>
+          <el-menu-item index="/ranking">销售排行榜</el-menu-item>
+          <el-menu-item index="/car" v-if="this.$store.state.islogin">购物车
+            <el-badge :value="$store.state.car_count" /></el-menu-item>
           <el-menu-item index="" v-if="!this.$store.state.islogin">【请登录】</el-menu-item>
-          <el-submenu index="/" v-if="this.$store.state.islogin">
+          <el-submenu index="/user" v-if="this.$store.state.islogin">
             <template slot="title">个人中心</template>
             <el-menu-item index="/">我的信息</el-menu-item>
             <el-menu-item index="/">订单详情</el-menu-item>
@@ -23,22 +24,23 @@
 </template>
 <script>
 import Login from './Login'
-	export default {
-		data() {
-			return {
-				car_count: 2
-			}
-		},
-		methods: {
-			handleSelect(key, keypath) {
-				console.log(key,keypath)
-				if (key == '') {
-					this.$store.commit('loginDialog')
-				}
-			}
-		},
-		components: { Login }
-	}
+export default {
+  data() {
+    return {
+      car_count: 2
+    }
+  },
+  methods: {
+    handleSelect(key, keypath) {
+      console.log(key, keypath)
+      if (key == '') {
+        this.$store.commit('loginDialog')
+      }
+    }
+  },
+  components: { Login }
+}
+
 </script>
 <style>
 .vheader {
@@ -69,4 +71,5 @@ import Login from './Login'
 .header_nav {
   float: right;
 }
+
 </style>
