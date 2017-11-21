@@ -36,6 +36,8 @@ if ($stme) {
 			setcookie('username', $USERNAME, time()+(60*60*24));
 			setcookie('password', $PASSWORD, time()+600);
 			setcookie('islogin', 'true', time()+(60*60*24));
+		} else {
+			setcookie('username', $USERNAME, time()+(60*60*24));
 		}
 		Response::show(200, 'success');
 	} else {

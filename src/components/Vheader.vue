@@ -59,7 +59,7 @@ export default {
   font-size: 22px;
   cursor: default;
   float: left;
-  font-weight: 700px;
+  font-weight: 700;
 }
 
 .header_con {
