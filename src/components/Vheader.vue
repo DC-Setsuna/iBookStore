@@ -14,7 +14,7 @@
             <template slot="title">个人中心</template>
             <el-menu-item index="/">我的信息</el-menu-item>
             <el-menu-item index="/">订单详情</el-menu-item>
-            <el-menu-item index="/">退出登录</el-menu-item>
+            <el-menu-item index="/" @click="quit">退出登录</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>
@@ -36,6 +36,9 @@ export default {
       if (key == '') {
         this.$store.commit('loginDialog')
       }
+    },
+    quit() {
+      this.$store.commit('quit')
     }
   },
   components: { Login }

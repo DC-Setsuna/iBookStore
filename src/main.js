@@ -18,7 +18,6 @@ Vue.use(VueAxios, axios)
 Vue.use(ElementUI)
 
 
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

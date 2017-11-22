@@ -109,6 +109,7 @@ export default {
           })
           this.$store.commit('login', this.formLabelLogin.username)
           this.closeDialog()
+          this.updateCar()
         }
       })
     },
@@ -130,8 +131,9 @@ export default {
             duration: 3000,
             offset: 100
           })
-          this.$store.commit('login',this.formLabelRegister.username)
+          this.$store.commit('login', this.formLabelRegister.username)
           this.closeDialog()
+          this.updateCar()
         }
       })
     },
@@ -170,6 +172,19 @@ export default {
         }
         this.register()
       }
+    },
+    updateCar: function() {
+      this.axios.get(this.$store.state.API + 'car.php', {
+        params: {
+          action: 'see',
+          username: this.$store.state.username
+        }
+      }).then((response) => {
+        if (response.data.code === 200) {
+          var len = response.data.data.length
+          this.$store.commit('addcar', len)
+        }
+      })
     }
   },
   created: function() {
