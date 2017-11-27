@@ -44,19 +44,17 @@
           <p>{{ book_detail.introduce }}</p>
         </div>
         <div style="border-top:1px solid #ddd;">
-        	<div style="padding-top:20px;width:500px;margin-bottom: 15px;">
-        		<textarea v-model="comment_message" style="width:500px;height:60px;resize:none;outline:none;border-radius:5px;border-color:#ccc;background-color:#eee;"></textarea>
-        		<el-button @click="commitComment" type="primary" size="mini" style="float:right;">提交评论</el-button>
-        	</div>
-        	
-        	<h3>评论列表</h3>
-        	<div style="width:450px;">
-        		<p v-for="comment in comments" style="border-bottom: 1px solid #ddd;margin: 15px 0;">
-	        		<span style="font-weight:700;font-size:17px;">{{ comment.username }} : </span>
-	        		<span style="font-size:14px;">{{ comment.comment }}</span>
-	        	</p>
-        	</div>
-        	
+          <div style="padding-top:20px;width:500px;margin-bottom: 15px;">
+            <textarea v-model="comment_message" style="width:500px;height:60px;resize:none;outline:none;border-radius:5px;border-color:#ccc;background-color:#eee;"></textarea>
+            <el-button @click="commitComment" type="primary" size="mini" style="float:right;">提交评论</el-button>
+          </div>
+          <h3>评论列表</h3>
+          <div style="width:450px;">
+            <p v-for="comment in comments" style="border-bottom: 1px solid #ddd;margin: 15px 0;">
+              <span style="font-weight:700;font-size:17px;">{{ comment.username }} : </span>
+              <span style="font-size:14px;">{{ comment.comment }}</span>
+            </p>
+          </div>
         </div>
       </div>
       <div class="detail-img">
@@ -66,7 +64,6 @@
   </transition>
 </template>
 <script>
-
 export default {
   data() {
     return {
@@ -115,39 +112,39 @@ export default {
 
     },
     commitComment() {
-    	if (!this.$store.state.islogin) {
-    		this.$message.error({
-    			message: '请先登录！！'
-    		})
-    		return
-    	}
-    	this.axios.get(this.$store.state.API + 'comment.php', {
-    		params: {
-    			action: 'add',
-    			username: this.$store.state.username,
-    			book_id: this.$route.params.bookid,
-    			comment: this.comment_message
-    		}
-    	}).then((response) => {
-    		if (response.data.code === 200) {
-    			this.$notify.info({
-    				message: '评论成功'
-    			})
-    			this.comment_message = ''
-    			this.getComment()
-    		}
-    	})
+      if (!this.$store.state.islogin) {
+        this.$message.error({
+          message: '请先登录！！'
+        })
+        return
+      }
+      this.axios.get(this.$store.state.API + 'comment.php', {
+        params: {
+          action: 'add',
+          username: this.$store.state.username,
+          book_id: this.$route.params.bookid,
+          comment: this.comment_message
+        }
+      }).then((response) => {
+        if (response.data.code === 200) {
+          this.$notify.info({
+            message: '评论成功'
+          })
+          this.comment_message = ''
+          this.getComment()
+        }
+      })
     },
     getComment() {
-    	this.axios.get(this.$store.state.API + 'comment.php', {
-	    	params: {
-	    		book_id: this.$route.params.bookid,
-	    		action: 'see'
-	    	}
-	    }).then((response) => {
-	    	console.log(response.data)
-	    	this.comments = response.data.data
-	    })
+      this.axios.get(this.$store.state.API + 'comment.php', {
+        params: {
+          book_id: this.$route.params.bookid,
+          action: 'see'
+        }
+      }).then((response) => {
+        console.log(response.data)
+        this.comments = response.data.data
+      })
     }
   },
   created: function() {
@@ -178,12 +175,13 @@ export default {
   position: absolute;
   top: 150px;
   width: 400px;
-
 }
 
 .bounce-enter-active {
   animation: bounce-in .5s;
 }
+
+
 
 /*.bounce-leave-active {
   animation: bounce-in .5s reverse;

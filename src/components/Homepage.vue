@@ -61,12 +61,12 @@ export default {
         '艺术': 'arts'
       },
       showbar_list: [
-        "/static/showbar1.jpg",
-        '/static/showbar2.jpg',
+        "/static/showbar2.jpg",
+        '/static/showbar4.jpg',
+        '/static/showbar3.jpg',
+        '/static/showbar4.jpg',
         '/static/showbar1.jpg',
-        '/static/showbar2.jpg',
-        '/static/showbar1.jpg',
-        '/static/showbar2.jpg'
+        '/static/showbar4.jpg'
       ],
       view_data: {}
     }
