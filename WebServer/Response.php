@@ -56,7 +56,7 @@ class Response {
 			'message' => $message,
 			'data' => $data
 		);
-
+		
 		echo json_encode($result);
 		exit;
 	}

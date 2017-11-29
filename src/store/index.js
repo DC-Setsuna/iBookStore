@@ -10,8 +10,8 @@ export default new Vuex.Store({
     car_count: 1,
     loginDialogVisible: false,
     islogin: false,
-    API: 'http://localhost/',
-    // API: 'https://www.importdc.com/',
+    // API: 'http://localhost/',
+    API: 'https://www.importdc.com/',
     username: ''
     
   },

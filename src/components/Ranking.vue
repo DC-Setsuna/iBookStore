@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<div v-for="data in datas" style="margin:15px 0">
+			<router-link :to="'/bookdetail/' + data.id" style="text-decoration=none; color:#333">
 			<el-card>
 				<div style="padding:0 10px; line-height: 100px;height:100px;">
 					<div style="float:left;width:40px;text-align:center;color:#B12704;font-size:20px;font-weight:700;">
@@ -19,8 +20,8 @@
 						类别：<span style="font-weight:500">{{ data.book_class }}</span>
 					</div>
 				</div>
-				
 			</el-card>
+		</router-link>
 		</div>
 	</div>
 </template>
@@ -43,5 +44,7 @@ export default {
 }
 </script>
 <style>
-	
+.el-card:hover {
+	background-color: #eee;
+}
 </style>

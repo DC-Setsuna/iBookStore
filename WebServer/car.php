@@ -22,11 +22,13 @@ if ($action == 'add') {
 	AND `book_id` = '{$book_id}';
 EOF;
 	$stme = $dbc->query($query_check);
-	if ($stme) {
-		$result = $stme->fetch();
+	$result = $stme->fetch();
+	// var_dump($ishave);
+	// var_dump((bool)$stme);
+	// print_r($stme);
+	if ($result) {
 		$nowcount = (int)$result['count'];
 		$nowcount = $nowcount + $count;
-		
 		$query_update = <<<EOF
 		UPDATE `car`
 		SET `count` = '{$nowcount}'
@@ -38,6 +40,7 @@ EOF;
 		if ($isSuccess) {
 			Response::show(200, 'add success');
 		} else {
+			echo "string";
 			Response::show(201, 'add error');
 		}
 	} else {
@@ -72,6 +75,14 @@ if ($action == 'see') {
 EOF;
 	$stme = $dbc->query($query_see);
 	$result = $stme->fetchAll(PDO::FETCH_ASSOC);
+	// print_r($result);
+	foreach ($result as $key => $value) {
+		// print_r($value);
+		$book_id = $value['book_id'];
+		$query_select = "SELECT * FROM `book` WHERE `id` = '{$book_id}'";
+		$book_detail = $dbc->query($query_select)->fetch();
+		$result[$key]['book_detail'] = $book_detail;
+	}
 	Response::show(200, 'see success', $result);
 }
 
