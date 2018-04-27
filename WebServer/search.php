@@ -1,7 +1,7 @@
 <?php 
 //dev env
 header('Access-Control-Allow-Origin: *');
-header("Content-type: text/html; charset=utf-8");
+header("Content-type: text/json; charset=utf-8");
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 include('Db.php');

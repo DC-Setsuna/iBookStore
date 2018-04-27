@@ -9,7 +9,7 @@ class Db {
 	private static $_instance;
 	public static $dbObj;
 
-	const DSN = 'mysql:host=localhost;dbname=ibook';
+	const DSN = 'mysql:host=localhost:9999;dbname=ibook';
 	const USERNAME = 'root';
 	const PASSWORD = 'root';
 

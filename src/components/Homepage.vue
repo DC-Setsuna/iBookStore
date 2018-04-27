@@ -5,7 +5,7 @@
         <el-select v-model="select" slot="prepend" placeholder="所有类别">
           <el-option v-for="(value, key) in class_list" :label="key" :value="key"></el-option>
         </el-select>
-        <el-button slot="append" icon="search"></el-button>
+        <el-button slot="append" icon="search" @click="search"></el-button>
       </el-input>
     </div>
     <div class="show-bar">
@@ -52,7 +52,7 @@ export default {
       keyword: '',
       select: '',
       class_list: {
-        '所有类别': 'all',
+        'all': 'all',
         '小说': 'fiction',
         '人文社科': 'humanities',
         '教育': 'education',
@@ -89,6 +89,13 @@ export default {
         }
 
       })
+    },
+    search: function() {
+      var datas = {
+        keyword: this.keyword,
+        select: this.select
+      }
+      this.$router.push({ name: 'Highsearch', params: datas})
     }
   },
   created: function() {

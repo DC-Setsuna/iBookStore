@@ -39,7 +39,7 @@ export default {
       keyword: '',
       select: '',
       class_list: {
-        '所有类别': 'all',
+        'all': 'all',
         '小说': 'fiction',
         '人文社科': 'humanities',
         '教育': 'education',
@@ -70,6 +70,13 @@ export default {
   	select: function() {
   		this.search()
   	}
+  },
+  created: function() {
+    // console.log(this.$route.params)
+    // alert(this.$route.params.select)
+    this.select = this.$route.params.select
+    this.keyword = this.$route.params.keyword
+    this.search()
   }
 }
 

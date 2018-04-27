@@ -57,8 +57,8 @@
             <span style="color:rgb(19,158,229);">支付宝</span>
             </span>
             <div style="text-align:center">
-              <img src="/static/Wechat.jpeg" width="250" height="250">
-              <img src="/static/Alipay.jpeg" width="250" height="250">
+              <img src="/static/Wechat.JPG" width="250" height="250">
+              <img src="/static/Alipay.JPG" width="250" height="250">
             </div>
             <div style="text-align:center;margin-top:10px">
               <span>付款金额：<span style="color: #B12704;font-size:20px;">¥  {{price}}</span></span>

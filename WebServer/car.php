@@ -40,7 +40,7 @@ EOF;
 		if ($isSuccess) {
 			Response::show(200, 'add success');
 		} else {
-			echo "string";
+			// echo "string";
 			Response::show(201, 'add error');
 		}
 	} else {

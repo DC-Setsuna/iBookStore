@@ -1,7 +1,7 @@
 <template>
   <div class="vheader">
     <div class="header_con">
-      <div class="header_title">iBook Store</div>
+      <div class="header_title">网上书城</div>
       <div class="header_nav">
         <el-menu theme="dark" :router="true" class="el-menu-demo" mode="horizontal" @select="handleSelect">
           <el-menu-item index="/"><i class="el-icon-menu"></i>首页</el-menu-item>
@@ -12,8 +12,6 @@
           <el-menu-item index="" v-if="!this.$store.state.islogin">【请登录】</el-menu-item>
           <el-submenu index="/user" v-if="this.$store.state.islogin">
             <template slot="title">个人中心</template>
-            <el-menu-item index="/">我的信息</el-menu-item>
-            <el-menu-item index="/">订单详情</el-menu-item>
             <el-menu-item index="/" @click="quit">退出登录</el-menu-item>
           </el-submenu>
         </el-menu>

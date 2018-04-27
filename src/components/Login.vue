@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="iBook Store Login" :visible="this.$store.state.loginDialogVisible" :show-close="false">
+  <el-dialog title="Book Store Login" :visible="this.$store.state.loginDialogVisible" :show-close="false">
     <el-tabs type="card" v-model="activeTab">
       <el-tab-pane label="登录" name="login">
         <el-form label-position="right" label-width="80px" :rules="loginRules" :model="formLabelLogin" ref="formLabelLogin">
